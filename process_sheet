@@ -14,3 +14,8 @@ def process_sheet(sheet_name, df_base):
     sheet_data.rename(columns={'col1': 'nova_col1'}, inplace=True)
     # Retorna o DataFrame processado da planilha
     return sheet_data
+# Abre o arquivo Excel
+filename = 'admincorp.xlsx'
+book = openpyxl.load_workbook(filename)
+# Obtém a lista de nome das planilhas
+sheet_names = book.sheetnames
