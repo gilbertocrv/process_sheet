@@ -1,0 +1,16 @@
+import pandas as pd
+#define a função process_sheet() que recebe dois argumentos: o nome da planilha a ser processada e um DataFrame base para realizar o merge.
+def process_sheet(sheet_name, df_base):
+    # Lê os dados da planilha e converte para DataFrame
+    sheet_data = pd.read_excel(filename, sheet_name=sheet_name)
+    # Preenche valores nulos e vazios
+    sheet_data.fillna('-', inplace=True)
+    sheet_data.replace('', '-', inplace=True)
+    # Adiciona a coluna com o nome da planilha
+    sheet_data['planilha'] = sheet_name
+    # Realiza o merge com o DataFrame base
+    sheet_data = pd.merge(sheet_data, df_base[['id', 'col1', 'col2']], on='id', how='left')
+    # Renomeia a coluna "col1" para "nova_col1"
+    sheet_data.rename(columns={'col1': 'nova_col1'}, inplace=True)
+    # Retorna o DataFrame processado da planilha
+    return sheet_data
